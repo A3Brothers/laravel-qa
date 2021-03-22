@@ -12,9 +12,14 @@
 
             <div class="flex flex-col justify-between w-8/12 m-auto">
                 @foreach ($questions as $question)
-                <div class="border bg-gray-100 text-red-600 my-2 p-1">
+                <div class="border bg-gray-100 text-red-500 my-2 p-1">
                     <div class="media-body">
-                        <h3 class="mt-0 font-bold text-xl">{{$question->title}}</h3>
+                        <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{{$question->title}}</a></h3>
+                        <p class="text-lg">
+                            asked by 
+                            <a class="hover:text-black text-gray-500" href="{{$question->user->url}}">{{$question->user->name}}</a>
+                            <small>{{ $question->created_date }}</small>
+                        </p>
                         {{ Str::limit($question->body, 250, '...') }}
                     </div>
                 </div>
