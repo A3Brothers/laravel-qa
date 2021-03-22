@@ -12,17 +12,27 @@
 
             <div class="flex flex-col justify-between w-8/12 m-auto">
                 @foreach ($questions as $question)
-                <div class="border bg-gray-100 text-red-500 my-2 p-1">
-                    <div class="media-body">
-                        <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{{$question->title}}</a></h3>
-                        <p class="text-lg">
-                            asked by 
-                            <a class="hover:text-black text-gray-500" href="{{$question->user->url}}">{{$question->user->name}}</a>
-                            <small>{{ $question->created_date }}</small>
-                        </p>
-                        {{ Str::limit($question->body, 250, '...') }}
+                <div class="flex">
+                    <div class="flex flex-col w-2/12 border-t-2">
+                        <div class="w-1/2 m-auto text-center">
+                            <div class="mb-3"><strong class="block text-4xl">{{ $question->votes }}</strong> {{Str::plural('vote', $question->votes)}}</div>
+                            <div class="mb-3 {{$question->status}}"><strong class="block text-4xl">{{ $question->answers }}</strong> {{Str::plural('answer', $question->answers)}}</div>
+                            <div><strong>{{ $question->views }}</strong> {{Str::plural('view', $question->views)}}</div>
+                        </div>
+                    </div>
+                    <div class="w-10/12 border bg-gray-100 text-red-500 my-2 p-1">
+                        <div class="media-body">
+                            <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{{$question->title}}</a></h3>
+                            <p class="text-lg">
+                                asked by 
+                                <a class="hover:text-black text-gray-500" href="{{$question->user->url}}">{{$question->user->name}}</a>
+                                <small>{{ $question->created_date }}</small>
+                            </p>
+                            {{ Str::limit($question->body, 250, '...') }}
+                        </div>
                     </div>
                 </div>
+                
                 @endforeach 
             <div class="mt-5"> {{ $questions->links() }} </div>
             </div>

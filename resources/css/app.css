@@ -1,3 +1,19 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.unanswered{
+    @apply border;
+    @apply bg-gray-200;
+}
+
+.answered{
+    @apply border;
+    @apply border-2;
+    @apply border-green-300;
+}
+
+.approvedanswered{
+    @apply bg-green-300;
+}

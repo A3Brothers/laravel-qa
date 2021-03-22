@@ -31432,6 +31432,24 @@ select {
           animation: bounce 1s infinite;
 }
 
+.unanswered{
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+}
+
+.answered{
+  border-width: 1px;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgba(110, 231, 183, var(--tw-border-opacity));
+}
+
+.approvedanswered{
+  --tw-bg-opacity: 1;
+  background-color: rgba(110, 231, 183, var(--tw-bg-opacity));
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
