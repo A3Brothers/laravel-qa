@@ -46,9 +46,12 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:255',
             'body' => 'required',
         ]);
+
+        $request->user()->questions()->create($request->only('title', 'body'));
+        return redirect()->route('questions.index')->with('success', 'Question added!');
     }
 
     /**

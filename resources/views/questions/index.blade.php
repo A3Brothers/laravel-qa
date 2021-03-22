@@ -9,6 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border">
                 <div class="flex justify-between text-md py-5 px-4 bg-red-100">
+                    @include('layouts._messages')
                     <h1>All Questions</h1>
                     <a class="bg-white h-10 w-32 pt-2 bg-green-300 text-center border rounded hover:bg-green-400" href="{{ route('questions.create') }}">Ask Question</a>
                 </div>
