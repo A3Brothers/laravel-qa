@@ -17,3 +17,7 @@
 .approvedanswered{
     @apply bg-green-300;
 }
+
+.invalid{
+    @apply border-red-700;
+}

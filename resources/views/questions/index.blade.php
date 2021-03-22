@@ -7,8 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <h1 class="text-center text-2xl font-bold">All Questions</h1>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border">
+                <div class="flex justify-between text-md py-5 px-4 bg-red-100">
+                    <h1>All Questions</h1>
+                    <a class="bg-white h-10 w-32 pt-2 bg-green-300 text-center border rounded hover:bg-green-400" href="{{ route('questions.create') }}">Ask Question</a>
+                </div>
 
             <div class="flex flex-col justify-between w-8/12 m-auto">
                 @foreach ($questions as $question)
@@ -41,21 +44,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{mix('css/app.css')}}">
-</head>
-<body>
-
-    
-       
-</body>
-</html>

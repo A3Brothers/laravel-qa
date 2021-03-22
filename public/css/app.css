@@ -31450,6 +31450,11 @@ select {
   background-color: rgba(110, 231, 183, var(--tw-bg-opacity));
 }
 
+.invalid{
+  --tw-border-opacity: 1;
+  border-color: rgba(185, 28, 28, var(--tw-border-opacity));
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
