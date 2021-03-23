@@ -62,7 +62,9 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        return "show";
+        $question->increment('views');
+
+        return view('questions.show', ['question'=> $question]);
 
     }
 
