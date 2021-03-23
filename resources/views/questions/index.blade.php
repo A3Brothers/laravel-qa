@@ -20,7 +20,7 @@
                     <div class="flex flex-col w-2/12 border-t-2">
                         <div class="w-1/2 m-auto text-center">
                             <div class="mb-3"><strong class="block text-4xl">{{ $question->votes }}</strong> {{Str::plural('vote', $question->votes)}}</div>
-                            <div class="mb-3 {{$question->status}}"><strong class="block text-4xl">{{ $question->answers }}</strong> {{Str::plural('answer', $question->answers)}}</div>
+                            <div class="mb-3 {{$question->status}}"><strong class="block text-4xl">{{ $question->answers_count }}</strong> {{Str::plural('answer', $question->answers_count)}}</div>
                             <div><strong>{{ $question->views }}</strong> {{Str::plural('view', $question->views)}}</div>
                         </div>
                     </div>
