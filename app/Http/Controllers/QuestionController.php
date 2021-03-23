@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show', 'index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -76,6 +80,8 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
+        $this->authorize('update', $question);
+
         return view('questions.edit', ['question'=> $question]);
     }
 
@@ -88,6 +94,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
+        $this->authorize('update', $question);
+
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
@@ -104,6 +112,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
+        $this->authorize('delete', $question);
+
         $question->delete();
         return redirect()->route('questions.index')->with('success', 'Deleted successfully!');
     }
