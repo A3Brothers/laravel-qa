@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
 use App\Models\User;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class QuestionController extends Controller
 {
@@ -76,6 +77,9 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
+        if(!Gate::allows('update-question', $question)){
+            abort(403);
+        }
         return view('questions.edit', ['question'=> $question]);
     }
 
@@ -88,6 +92,10 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
+        if(!Gate::allows('update-question', $question)){
+            abort(403);
+        }
+
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
@@ -104,6 +112,10 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
+        if(!Gate::allows('delete-question', $question)){
+            abort(403);
+        }
+
         $question->delete();
         return redirect()->route('questions.index')->with('success', 'Deleted successfully!');
     }

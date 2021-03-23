@@ -29,14 +29,19 @@
                             <div class="flex justify-between">
                                 <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{{$question->title}}</a></h3>
                                 <div class="flex">
-                                    <div class="h-7 bg-blue-400 mr-2 cursor-pointer px-4 text-white rounded border-black hover:bg-blue-500"><a href="{{ route('questions.edit', $question->id) }}">Edit</a></div>
+                                    @can('update-question', $question)
+                                    <div class="h-7 bg-blue-400 mr-2 cursor-pointer px-4 text-white rounded border-black hover:bg-blue-500"><a href="{{ route('questions.edit', $question->id) }}">Edit</a></div>    
+                                    @endcan
+                                    
+                                    @can('delete-question', $question)
                                     <div class="h-7 bg-red-400 cursor-pointer px-4 text-white rounded border-black hover:bg-red-500">
                                         <form action="{{ route('questions.destroy', $question->id) }}" method="post" onclick="return confirm('are you sure!')">
                                         @csrf
                                         @method('delete')
                                         <button>Delete</button>
                                         </form>
-                                    </div>
+                                    </div>                                        
+                                    @endcan
                                 </div>
                             </div>
                             <p class="text-lg">
