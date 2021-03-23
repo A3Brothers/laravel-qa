@@ -11,7 +11,7 @@
                 <div class="flex justify-between text-md py-5 px-4 bg-red-100">
                     @include('layouts._messages')
                     <h1>All Questions</h1>
-                    <a class="bg-white h-10 w-32 pt-2 bg-green-300 text-center border rounded hover:bg-green-400" href="{{ route('questions.create') }}">Ask Question</a>
+                    <a class="h-10 w-32 pt-2 bg-green-300 text-center border rounded hover:bg-green-400" href="{{ route('questions.create') }}">Ask Question</a>
                 </div>
 
             <div class="flex flex-col justify-between w-8/12 m-auto">
@@ -26,7 +26,10 @@
                     </div>
                     <div class="w-10/12 border bg-gray-100 text-red-500 my-2 p-1">
                         <div class="media-body">
-                            <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{{$question->title}}</a></h3>
+                            <div class="flex justify-between">
+                                <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{{$question->title}}</a></h3>
+                                <div class="bg-blue-400 cursor-pointer px-4 text-white rounded border-black hover:bg-blue-500"><a href="{{ route('questions.edit', $question->id) }}">Edit</a></div>
+                            </div>
                             <p class="text-lg">
                                 asked by 
                                 <a class="hover:text-black text-gray-500" href="{{$question->user->url}}">{{$question->user->name}}</a>

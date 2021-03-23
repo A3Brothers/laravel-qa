@@ -14,9 +14,10 @@
                 </div>
 
                 <div>
-                    <form action="{{route('questions.store')}}" method="POST">
+                    <form action="{{route('questions.update', $question->id)}}" method="POST">
                         @csrf
-                        @include('questions._formRequest', ['buttonText'=>'Add Question'])
+                        @method('PUT')
+                        @include('questions._formRequest', ['buttonText'=>'Update Question'])
                     </form>
                 </div>
 
