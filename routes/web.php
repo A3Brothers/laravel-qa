@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 
@@ -23,6 +24,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('questions', QuestionController::class)->except('show');
+
+Route::resource('questions.answers', AnswerController::class)->middleware('auth')->only('store', 'update', 'destroy');
+
 
 Route::get('questions/{slug}', [QuestionController::class, 'show'])->name('questions.show');
 

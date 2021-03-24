@@ -9,7 +9,7 @@ class Answer extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['body', 'user_id', 'question_id'];
 
     public function question(){
         return $this->belongsTo(Question::class);
@@ -29,4 +29,10 @@ class Answer extends Model
         });
 
     }
+
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
 }

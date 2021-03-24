@@ -1,4 +1,4 @@
-/* @import 'tailwindcss/base';
+@import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
@@ -7,23 +7,3 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
-*/
-
-.unanswered{
-    @apply border;
-    @apply bg-gray-200;
-}
-
-.answered{
-    @apply border;
-    @apply border-2;
-    @apply border-green-300;
-}
-
-.approvedanswered{
-    @apply bg-green-300;
-}
-
-.invalid{
-    @apply border-red-700;
-} 
