@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('questions', QuestionController::class)->except('show');
 
-Route::resource('questions.answers', AnswerController::class)->middleware('auth')->only('store', 'update', 'destroy');
+Route::resource('questions.answers', AnswerController::class)->middleware('auth')->only('store', 'edit', 'update', 'destroy');
 
 
 Route::get('questions/{slug}', [QuestionController::class, 'show'])->name('questions.show');

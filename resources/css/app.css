@@ -27,3 +27,7 @@
 .invalid{
     @apply border-red-700;
 } 
+
+.vote-accepted{
+    @apply text-green-400;
+}

@@ -28,15 +28,33 @@ class AnswerController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Question  $question
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Question $question, Answer $answer)
+    {
+        $this->authorize('update', $answer);
+
+        return view('answers.edit', ['answer'=> $answer, 'question' => $question]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Question $question, Answer $answer)
     {
-        
+        $this->authorize('update', $answer);
+
+        $answer->update($request->validate([
+            'body'=> 'required',
+        ]));
+        return redirect()->route('questions.show', $question->slug)->with('success', 'message update successfully!');
     }
 
     /**
@@ -45,8 +63,12 @@ class AnswerController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Question $question, Answer $answer)
     {
-    
+        $this->authorize('delete', $answer);
+
+        $answer->delete();
+        
+        return back()->with('success', 'answer deleted!');
     }
 }

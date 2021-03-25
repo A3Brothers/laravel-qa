@@ -190657,5 +190657,10 @@ readers do not read off random characters that represent icons */
 .invalid{
   --tw-border-opacity: 1;
   border-color: rgba(185, 28, 28, var(--tw-border-opacity));
-} 
+}
+
+.vote-accepted{
+  --tw-text-opacity: 1;
+  color: rgba(52, 211, 153, var(--tw-text-opacity));
+}
 

@@ -70,14 +70,31 @@
                                     <i class="text-gray-400 fas fa-caret-down fa-2x"></i>
                                 </div>
                                 <div class="cursor-pointer w-10 text-center">
-                                    <i class="text-green-400 fas fa-check fa-lg"></i>
+                                    <i class="{{$answer->status}} hover:text-green-600 fas fa-check fa-lg"></i>
                                 </div>
                             </div>
 
                             <div class="w-11/12">
                                 <li class="border-b-2 my-4 bg-gray-50">
                                     {{$answer->body}}
-                                    <br>
+
+                                    <div class="flex mt-4">
+                                        @can('update', $answer)
+                                        <div class="h-7 bg-blue-400 mr-2 cursor-pointer px-4 text-white rounded border-black hover:bg-blue-500"><a href="{{ route('questions.answers.edit', [$question->id, $answer->id]) }}">Edit</a></div>
+                                        @endcan
+    
+                                        @can('delete', $answer)
+                                        <div class="h-7 bg-red-400 cursor-pointer px-4 text-white rounded border-black hover:bg-red-500">
+                                            <form action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}" method="post" onclick="return confirm('are you sure!')">
+                                            @csrf
+                                            @method('delete')
+                                            <button>Delete</button>
+                                            </form>
+                                        </div>                                        
+                                        @endcan
+                                    </div>
+
+                                
                                     <div class="text-right mb-4">
                                         <div class="">
                                             <span class="block">Answered {{$answer->created_date}}</span>
