@@ -71,4 +71,9 @@ class AnswerController extends Controller
         
         return back()->with('success', 'answer deleted!');
     }
+
+    public function accept(Answer $answer){
+        $answer->question->acceptBestAnswer($answer);
+        return back();
+    }
 }

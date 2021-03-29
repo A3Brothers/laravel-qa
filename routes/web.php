@@ -27,8 +27,9 @@ Route::resource('questions', QuestionController::class)->except('show');
 
 Route::resource('questions.answers', AnswerController::class)->middleware('auth')->only('store', 'edit', 'update', 'destroy');
 
-
 Route::get('questions/{slug}', [QuestionController::class, 'show'])->name('questions.show');
+
+Route::post('answers/{answer}', [AnswerController::class, 'accept'])->name('answers.accept');
 
 
 require __DIR__.'/auth.php';

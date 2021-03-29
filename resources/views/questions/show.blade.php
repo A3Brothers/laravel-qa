@@ -69,9 +69,21 @@
                                 <div class="cursor-pointer w-10 text-center">
                                     <i class="text-gray-400 fas fa-caret-down fa-2x"></i>
                                 </div>
-                                <div class="cursor-pointer w-10 text-center">
-                                    <i class="{{$answer->status}} hover:text-green-600 fas fa-check fa-lg"></i>
-                                </div>
+                                @can('accept', $answer)
+                                    <div onclick="event.preventDefault(); getElementById('accept-answer-{{ $answer->id }}').submit();" class="cursor-pointer w-10 text-center">
+                                        <i class="{{$answer->status}} hover:text-green-600 fas fa-check fa-lg"></i>
+                                    </div>
+                                    <form action="{{ route('answers.accept', $answer->id) }}"method="POST" id="accept-answer-{{ $answer->id }}" style="display: none;">
+                                        @csrf
+                                    </form>
+                                @else
+                                    @if ($answer->is_best)
+                                        <div class="cursor-pointer w-10 text-center">
+                                            <i class="{{$answer->status}} hover:text-green-600 fas fa-check fa-lg"></i>
+                                        </div>
+                                    @endif
+                                @endcan
+                                
                             </div>
 
                             <div class="w-11/12">

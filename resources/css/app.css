@@ -29,5 +29,5 @@
 } 
 
 .vote-accepted{
-    @apply text-green-400;
+    @apply text-green-500;
 }

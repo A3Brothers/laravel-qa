@@ -67,6 +67,7 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         $question->increment('views');
+        // dd($question->answers);
 
         return view('questions.show', ['question'=> $question]);
 
@@ -117,4 +118,5 @@ class QuestionController extends Controller
         $question->delete();
         return redirect()->route('questions.index')->with('success', 'Deleted successfully!');
     }
+
 }
