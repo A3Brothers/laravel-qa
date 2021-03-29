@@ -190664,3 +190664,23 @@ readers do not read off random characters that represent icons */
   color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
 
+.favorite{
+  --tw-text-opacity: 1;
+  color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+
+.favorite:hover{
+  --tw-text-opacity: 1;
+  color: rgba(251, 191, 36, var(--tw-text-opacity));
+}
+
+.unfavorite{
+  --tw-text-opacity: 1;
+  color: rgba(251, 191, 36, var(--tw-text-opacity));
+}
+
+.unfavorite:hover{
+  --tw-text-opacity: 1;
+  color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+

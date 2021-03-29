@@ -3802,6 +3802,21 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+var favorite = document.getElementById('favorite');
+var unfavorite = document.getElementById('unfavorite');
+
+if (favorite) {
+  favorite.addEventListener('click', function () {
+    document.getElementById('postQuestionFavorite').submit();
+  });
+}
+
+if (unfavorite) {
+  unfavorite.addEventListener('click', function () {
+    document.getElementById('deleteQuestionFavorite').submit();
+  });
+}
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

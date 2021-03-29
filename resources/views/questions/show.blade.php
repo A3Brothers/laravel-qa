@@ -19,10 +19,19 @@
                     <div class="cursor-pointer w-10 text-center">
                         <i class="text-gray-400 fas fa-caret-down fa-2x"></i>
                     </div>
-                    <div class="cursor-pointer w-10 text-center">
-                        <i class="text-yellow-400 fas fa-star fa-lg"></i>
+                    <div id=@if($question->is_favorited) "unfavorite" @else "favorite" @endif class="cursor-pointer w-10 text-center">
+                        <i class="@if($question->is_favorited) unfavorite @else favorite @endif  fas fa-star fa-lg"></i>
                     </div>
-                    <p>165654</p>
+
+                    <form id="postQuestionFavorite" action="{{route('questions.favorite', $question->id)}}" method="post">
+                        @csrf
+                    </form>
+                    <form id="deleteQuestionFavorite" action="{{route('questions.unfavorite', $question->id)}}" method="post">
+                        @method('delete')
+                        @csrf
+                    </form>
+
+                    <p>{{$question->favorites_count}}</p>
                 </div>
                 <div class="flex flex-col w-11/12">
                     <div class="border bg-gray-100 text-red-500 my-2 p-1">
