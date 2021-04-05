@@ -12,13 +12,27 @@
                 
             <div class="flex justify-between m-auto">
                 <div class="flex flex-col w-1/12 justify-center items-center bg-gray-100">
-                    <div class="cursor-pointer w-10 text-center">
+
+                    <div id="upVote" class="cursor-pointer w-10 text-center">
                         <i class="fas fa-caret-up fa-2x"></i>
                     </div>
-                    <p>165654</p>
-                    <div class="cursor-pointer w-10 text-center">
+
+                    <form id="questionUpVote" action="{{route('question.vote', $question->id)}}" method="post">
+                     @csrf
+                     <input type="hidden" name="vote" value="1">
+                    </form>
+
+                    <p>{{$question->votes}}</p>
+
+                    <div id="downVote" class="cursor-pointer w-10 text-center">
                         <i class="text-gray-400 fas fa-caret-down fa-2x"></i>
                     </div>
+
+                    <form id="questionDownVote" action="{{route('question.vote', $question->id)}}" method="post">
+                     @csrf
+                     <input type="hidden" name="vote" value="-1">
+                    </form>
+
                     <div id=@if($question->is_favorited) "unfavorite" @else "favorite" @endif class="cursor-pointer w-10 text-center">
                         <i class="@if($question->is_favorited) unfavorite @else favorite @endif  fas fa-star fa-lg"></i>
                     </div>
@@ -71,13 +85,27 @@
                         @foreach ($question->answers as $answer)
                         <div class="flex">
                             <div class="flex flex-col w-1/12 justify-center items-center">
-                                <div class="cursor-pointer w-10 text-center">
+
+                                <div class="upVoteA cursor-pointer w-10 text-center">
                                     <i class="fas fa-caret-up fa-2x"></i>
                                 </div>
-                                <p>165654</p>
-                                <div class="cursor-pointer w-10 text-center">
+
+                                <form class="answerUpVote" action="{{route('answer.vote', $answer->id)}}" method="post">
+                                @csrf
+                                <input type="hidden" name="vote" value="1">
+                                </form>
+
+                                <p>{{$answer->votes_count}}</p>
+
+                                <div class="downVoteA cursor-pointer w-10 text-center">
                                     <i class="text-gray-400 fas fa-caret-down fa-2x"></i>
                                 </div>
+
+                                <form class="answerDownVote" action="{{route('answer.vote', $answer->id)}}" method="post">
+                                @csrf
+                                <input type="hidden" name="vote" value="-1">
+                                </form>
+
                                 @can('accept', $answer)
                                     <div onclick="event.preventDefault(); getElementById('accept-answer-{{ $answer->id }}').submit();" class="cursor-pointer w-10 text-center">
                                         <i class="{{$answer->status}} hover:text-green-600 fas fa-check fa-lg"></i>

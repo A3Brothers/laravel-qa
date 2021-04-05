@@ -65,4 +65,42 @@ class User extends Authenticatable
 
         return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?s=" . $size;
     }
+
+    public function voteQuestions(){
+        return $this->morphedByMany(Question::class, 'votable');
+    }
+
+    public function voteAnswers(){
+        return $this->morphedByMany(Answer::class, 'votable');
+    }
+
+    public function voteQuestion(Question $question, $vote){
+        if($this->voteQuestions()->where('votable_id', $question->id)->exists()){
+            $this->voteQuestions()->updateExistingPivot($question, ['vote'=>$vote]);
+        }else{
+            $this->voteQuestions()->attach($question, ['vote'=>$vote]);
+        }
+        $question->load('voteUsers');
+
+        $downVotes = (int) $question->downVotes()->sum('vote');
+        $upVotes = (int) $question->upVotes()->sum('vote');
+
+        $question->votes = $upVotes + $downVotes;
+        $question->save();
+    }
+
+    public function voteAnswer(Answer $answer, $vote){
+        if($this->voteAnswers()->where('votable_id', $answer->id)->exists()){
+            $this->voteAnswers()->updateExistingPivot($answer, ['vote'=>$vote]);
+        }else{
+            $this->voteAnswers()->attach($answer, ['vote'=>$vote]);
+        }
+        $answer->load('voteUsers');
+
+        $downVotes = (int) $answer->downVotes()->sum('vote');
+        $upVotes = (int) $answer->upVotes()->sum('vote');
+
+        $answer->votes_count = $upVotes + $downVotes;
+        $answer->save();
+    }
 }

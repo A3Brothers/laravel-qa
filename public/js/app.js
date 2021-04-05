@@ -3804,6 +3804,10 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 var favorite = document.getElementById('favorite');
 var unfavorite = document.getElementById('unfavorite');
+var upVote = document.getElementById('upVote');
+var downVote = document.getElementById('downVote');
+var upVoteA = document.getElementsByClassName('upVoteA');
+var downVoteA = document.getElementsByClassName('downVoteA');
 
 if (favorite) {
   favorite.addEventListener('click', function () {
@@ -3815,6 +3819,33 @@ if (unfavorite) {
   unfavorite.addEventListener('click', function () {
     document.getElementById('deleteQuestionFavorite').submit();
   });
+}
+
+upVote.addEventListener('click', function () {
+  document.getElementById('questionUpVote').submit();
+});
+downVote.addEventListener('click', function () {
+  document.getElementById('questionDownVote').submit();
+});
+
+var _loop = function _loop(i) {
+  upVoteA[i].addEventListener('click', function () {
+    document.getElementsByClassName('answerUpVote')[i].submit();
+  });
+};
+
+for (var i = 0; i < upVoteA.length; i++) {
+  _loop(i);
+}
+
+var _loop2 = function _loop2(_i) {
+  downVoteA[_i].addEventListener('click', function () {
+    document.getElementsByClassName('answerDownVote')[_i].submit();
+  });
+};
+
+for (var _i = 0; _i < downVoteA.length; _i++) {
+  _loop2(_i);
 }
 
 /***/ }),
