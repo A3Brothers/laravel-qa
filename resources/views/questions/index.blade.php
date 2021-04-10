@@ -15,7 +15,7 @@
                 </div>
 
             <div class="flex flex-col justify-between w-8/12 m-auto">
-                @foreach ($questions as $question)
+                @forelse ($questions as $question)
                 <div class="flex">
                     <div class="flex flex-col w-2/12 border-t-2">
                         <div class="w-1/2 m-auto text-center">
@@ -53,8 +53,13 @@
                         </div>
                     </div>
                 </div>
+                @empty
+                    <div class="bg-yellow-200 text-red-900 h-10 text-center">
+                        <p> <b>Sorry, </b>There are no questions available!</p>
+
+                    </div>
                 
-                @endforeach 
+                @endforelse 
             <div class="mt-5"> {{ $questions->links() }} </div>
             </div>
 
