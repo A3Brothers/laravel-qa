@@ -13,25 +13,7 @@
             <div class="flex justify-between m-auto">
                 <div class="flex flex-col w-1/12 justify-center items-center bg-gray-100">
 
-                    <div id="upVote" class="cursor-pointer w-10 text-center">
-                        <i class="fas fa-caret-up fa-2x"></i>
-                    </div>
-
-                    <form id="questionUpVote" action="{{route('question.vote', $question->id)}}" method="post">
-                     @csrf
-                     <input type="hidden" name="vote" value="1">
-                    </form>
-
-                    <p>{{$question->votes}}</p>
-
-                    <div id="downVote" class="cursor-pointer w-10 text-center">
-                        <i class="text-gray-400 fas fa-caret-down fa-2x"></i>
-                    </div>
-
-                    <form id="questionDownVote" action="{{route('question.vote', $question->id)}}" method="post">
-                     @csrf
-                     <input type="hidden" name="vote" value="-1">
-                    </form>
+                    @include('questions._question_answer_voting', ['model'=> $question, 'uri'=> 'question.vote'])
 
                     <div id=@if($question->is_favorited) "unfavorite" @else "favorite" @endif class="cursor-pointer w-10 text-center">
                         <i class="@if($question->is_favorited) unfavorite @else favorite @endif  fas fa-star fa-lg"></i>
@@ -55,23 +37,18 @@
                                 <a class="h-10 w-auto pt-2 bg-white text-center border-2 shadow-sm rounded" href="{{ route('questions.index') }}">Back to all questions</a>
                             </div>
                             <div class="flex justify-between">
-                                <h1 class="mt-0 font-bold text-xl">{{$question->title}}</h1>
+                                <h1 class="mt-0 font-bold text-xl">{!!Purifier::clean($question->title)!!}</h1>
                             </div>
                             <p class="text-lg">
                                 asked by 
                                 <a class="hover:text-black text-gray-500" href="{{$question->user->url}}">{{$question->user->name}}</a>
                                 <small>{{ $question->created_date }}</small>
                             </p>
-                            @parsedown($question->body)
-                            <div class="text-right mb-4">
-                                <div class="">
-                                    <span class="block">Answered {{$question->created_date}}</span>
-                                    <a href="{{$question->user->url}}">
-                                        <img class="inline-block" src="{{$question->user->avatar}}" alt="">
-                                    </a>
-                                    <a href="{{$question->user->url}}">{{$question->user->name}}</a>
-                                </div>
-                            </div>
+                            {!!Purifier::clean($question->body)!!}
+                            
+
+                            @include('questions._name_icon_tag', ['model' => $question])
+
                         </div>
                     </div>
                 </div>
@@ -86,25 +63,7 @@
                         <div class="flex">
                             <div class="flex flex-col w-1/12 justify-center items-center">
 
-                                <div class="upVoteA cursor-pointer w-10 text-center">
-                                    <i class="fas fa-caret-up fa-2x"></i>
-                                </div>
-
-                                <form class="answerUpVote" action="{{route('answer.vote', $answer->id)}}" method="post">
-                                @csrf
-                                <input type="hidden" name="vote" value="1">
-                                </form>
-
-                                <p>{{$answer->votes_count}}</p>
-
-                                <div class="downVoteA cursor-pointer w-10 text-center">
-                                    <i class="text-gray-400 fas fa-caret-down fa-2x"></i>
-                                </div>
-
-                                <form class="answerDownVote" action="{{route('answer.vote', $answer->id)}}" method="post">
-                                @csrf
-                                <input type="hidden" name="vote" value="-1">
-                                </form>
+                                @include('questions._question_answer_voting', ['model'=> $answer, 'uri'=> 'answer.vote'])
 
                                 @can('accept', $answer)
                                     <div onclick="event.preventDefault(); getElementById('accept-answer-{{ $answer->id }}').submit();" class="cursor-pointer w-10 text-center">
@@ -125,7 +84,7 @@
 
                             <div class="w-11/12">
                                 <li class="border-b-2 my-4 bg-gray-50">
-                                    {{$answer->body}}
+                                {!!Purifier::clean($answer->body)!!}
 
                                     <div class="flex mt-4">
                                         @can('update', $answer)
@@ -143,16 +102,7 @@
                                         @endcan
                                     </div>
 
-                                
-                                    <div class="text-right mb-4">
-                                        <div class="">
-                                            <span class="block">Answered {{$answer->created_date}}</span>
-                                            <a href="{{$answer->user->url}}">
-                                                <img class="inline-block" src="{{$answer->user->avatar}}" alt="">
-                                            </a>
-                                            <a href="{{$answer->user->url}}">{{$answer->user->name}}</a>
-                                        </div>
-                                    </div>
+                                    @include('questions._name_icon_tag', ['model' => $answer])
                                 
                                 </li>
                             </div>

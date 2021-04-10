@@ -9,6 +9,8 @@ class Answer extends Model
 {
     use HasFactory;
 
+    use Vote;
+
     protected $fillable = ['body', 'user_id', 'question_id'];
 
     public function question(){
@@ -51,15 +53,6 @@ class Answer extends Model
         return $this->id === $this->question->best_answer_id;
     }
 
-    public function voteUsers(){
-        return $this->morphToMany(User::class, 'votable');
-    }
-
-    public function downVotes(){
-        return $this->voteUsers()->wherePivot('vote', -1);
-    }
-    public function upVotes(){
-        return $this->voteUsers()->wherePivot('vote', 1);
-    }
+    
 
 }

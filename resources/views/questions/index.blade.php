@@ -27,7 +27,7 @@
                     <div class="w-10/12 border bg-gray-100 text-red-500 my-2 p-1">
                         <div class="media-body">
                             <div class="flex justify-between">
-                                <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{{$question->title}}</a></h3>
+                                <h3 class="mt-0 font-bold text-xl hover:text-red-800"><a href="{{$question->url}}">{!!Purifier::clean($question->title)!!}</a></h3>
                                 <div class="flex">
                                     @can('update', $question)
                                     <div class="h-7 bg-blue-400 mr-2 cursor-pointer px-4 text-white rounded border-black hover:bg-blue-500"><a href="{{ route('questions.edit', $question->id) }}">Edit</a></div>
@@ -49,7 +49,7 @@
                                 <a class="hover:text-black text-gray-500" href="{{$question->user->url}}">{{$question->user->name}}</a>
                                 <small>{{ $question->created_date }}</small>
                             </p>
-                            {{ Str::limit($question->body, 250, '...') }}
+                            {!! Str::limit(Purifier::clean($question->body), 200, '...') !!}
                         </div>
                     </div>
                 </div>

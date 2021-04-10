@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Support\Str;
+use Mews\Purifier\Facades\Purifier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
 {
     use HasFactory;
+
+    use Vote;
 
     protected $fillable = ['title', 'body'];
 
@@ -41,6 +44,10 @@ class Question extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
+    // public function setBodyAttribute($value){
+    //     $this->attributes['body'] = Purifier::clean($value);
+    // }
+
     public function getUrlAttribute(){
         return route("questions.show", $this->slug);
     }
@@ -72,14 +79,9 @@ class Question extends Model
         $this->save();
     }
 
-    public function voteUsers(){
-        return $this->morphToMany(User::class, 'votable');
+    public function getBodyHtmlAttribute()
+    {
+        return Purifier::clean($this->body);
     }
 
-    public function downVotes(){
-        return $this->voteUsers()->wherePivot('vote', -1);
-    }
-    public function upVotes(){
-        return $this->voteUsers()->wherePivot('vote', 1);
-    }
 }
