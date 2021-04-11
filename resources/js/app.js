@@ -2,6 +2,18 @@ require('./bootstrap');
 
 require('alpinejs');
 
+import {createApp} from 'vue';
+
+import userInfo from './components/userInfo.vue';
+
+const app = createApp({
+    components: {
+        userInfo,
+    }
+});
+
+app.mount('#app');
+
 let favorite = document.getElementById('favorite');
 
 let unfavorite = document.getElementById('unfavorite');
