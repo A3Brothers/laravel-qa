@@ -40,3 +40,7 @@
     @apply text-yellow-400;
     @apply hover:text-gray-400;
 }
+
+[v-cloak]{
+    display: none;
+}

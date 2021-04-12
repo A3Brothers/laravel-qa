@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mews\Purifier\Facades\Purifier;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Answer extends Model
 {
@@ -13,7 +14,7 @@ class Answer extends Model
 
     protected $fillable = ['body', 'user_id', 'question_id'];
 
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date', 'body_html'];
 
 
     public function question(){
@@ -54,6 +55,10 @@ class Answer extends Model
     public function isBest()
     {
         return $this->id === $this->question->best_answer_id;
+    }
+
+    public function getBodyhtmlAttribute(){
+        return Purifier::clean($this->body);
     }
 
     

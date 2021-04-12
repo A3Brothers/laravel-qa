@@ -49,14 +49,30 @@
                             
                             <user-info :model="{{$question}}" label="Asked"></user-info>
                             
-                            {{-- @include('questions._name_icon_tag', ['model' => $question]) --}}
 
                         </div>
                     </div>
                 </div>
             </div>
 
-            @include('questions._show_answer', ['question'=>$question])
+            @if ($question->answers_count)
+                <div class="flex flex-col border" v-cloak>
+                    <div class="text-2xl ml-2 my-4">
+                    {{$question->answers_count}} {{Str::plural('answer', $question->answers_count)}}
+                    </div>
+                    <div class="p-1">
+                        <ul>
+                            @foreach ($question->answers as $answer)
+
+                                @include('questions._show_answer', ['answer'=>$answer, 'question'=> $question])
+
+                            
+                            @endforeach
+                        </ul>
+                        
+                    </div>
+                </div>
+            @endif
             
 
             <div class="flex flex-col">

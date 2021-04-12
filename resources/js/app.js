@@ -5,10 +5,12 @@ require('alpinejs');
 import {createApp} from 'vue';
 
 import userInfo from './components/userInfo.vue';
+import answer from './components/Answer.vue';
 
 const app = createApp({
     components: {
         userInfo,
+        answer,
     }
 });
 
